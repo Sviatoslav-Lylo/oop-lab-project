@@ -10,6 +10,8 @@ import LabProject.model.Appointment;
 import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +19,12 @@ import java.util.List;
 public class JsonStorageService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     
-    private static final String DOCTORS_FILE = "doctors.json";
-    private static final String PATIENTS_FILE = "patients.json";
-    private static final String APPOINTMENTS_FILE = "appointments.json";
+    private static final Path DATA_DIRECTORY = Path.of("data");
+    private static final String DOCTORS_FILE = DATA_DIRECTORY.resolve("doctors.json").toString();
+    private static final String PATIENTS_FILE = DATA_DIRECTORY.resolve("patients.json").toString();
+    private static final String APPOINTMENTS_FILE = DATA_DIRECTORY.resolve("appointments.json").toString();
 
-    private <T extends Comparable<? super T>> void saveToFile(String fileName, DoublyLinkedList<T> list) {
+    private <T extends Comparable<? super T>> boolean saveToFile(String fileName, DoublyLinkedList<T> list) {
         try {
             List<T> standardList = new ArrayList<>();
 
@@ -30,16 +33,27 @@ public class JsonStorageService {
             }
 
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileName), standardList);
+            return true;
         } catch (IOException e) {
             System.err.println("Error saving to " + fileName + ": " + e.getMessage());
+            return false;
         }
     }
 
     public void saveAll(DoublyLinkedList<Doctor> d, DoublyLinkedList<Patient> p, DoublyLinkedList<Appointment> a) {
-        saveToFile(DOCTORS_FILE, d);
-        saveToFile(PATIENTS_FILE, p);
-        saveToFile(APPOINTMENTS_FILE, a);
-        System.out.println("All data saved to JSON successfully.");
+        try {
+            Files.createDirectories(DATA_DIRECTORY);
+        } catch (IOException e) {
+            System.err.println("Error creating data directory: " + e.getMessage());
+            return;
+        }
+
+        boolean doctorsSaved = saveToFile(DOCTORS_FILE, d);
+        boolean patientsSaved = saveToFile(PATIENTS_FILE, p);
+        boolean appointmentsSaved = saveToFile(APPOINTMENTS_FILE, a);
+        if(doctorsSaved && patientsSaved && appointmentsSaved) {
+            System.out.println("All data saved to JSON successfully.");
+        }
     }
 
     public void loadData(Hospital hospital) {
