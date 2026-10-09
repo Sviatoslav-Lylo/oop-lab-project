@@ -36,42 +36,42 @@ public class Main implements CommandLineRunner {
         SortContext<Patient> patientSortContext = new SortContext<>();
         SortContext<Doctor> doctorSortContext = new SortContext<>();
 
-        // Використання анонімного "одноразового" класу
+        // Use an anonymous one-off class
         Person director = new Person("Roman", 0) {
             String phoneNumber = "+38 067 033 7777";
             @Override
             public void showProfile() {
                 System.out.println("=====================");
-                System.out.println("Системний адміністратор");
+                System.out.println("System administrator");
                 System.out.println(getName());
-                System.out.println("Номер телефону: " + phoneNumber);
+                System.out.println("Phone number: " + phoneNumber);
                 System.out.println("=====================");
             }
         };
 
-        // Меню
+        // Menu
         while(true) {
-            System.out.println("---------- ЛІКАРНЯ ----------");
-            System.out.println("1. Зареєструвати пацієнта");
-            System.out.println("2. Зареєструвати лікаря");
-            System.out.println("3. Виписати пацієнта");
-            System.out.println("4. Виписати лікаря");
-            System.out.println("5. Показати всіх пацієнтів");
-            System.out.println("6. Показати всіх лікарів");
-            System.out.println("7. Показати профіль директора");
-            System.out.println("Пошук осіб:");
-            System.out.println("8. Знайти лікаря за іменем");
-            System.out.println("9. Знайти лікаря за ID");
-            System.out.println("10. Знайти пацієнта за іменем");
-            System.out.println("11. Знайти пацієнта за ID");
-            System.out.println("Записи:");
-            System.out.println("12. Додати запис");
-            System.out.println("13. Переглянути всі записи\n-----------------------------");
-            System.out.println("14. Відсортувати список пацієнтів.");
-            System.out.println("15. Відсортувати список лікарів.");
-            System.out.println("0. Вийти.");
+            System.out.println("---------- HOSPITAL ----------");
+            System.out.println("1. Register a patient");
+            System.out.println("2. Register a doctor");
+            System.out.println("3. Discharge a patient");
+            System.out.println("4. Discharge a doctor");
+            System.out.println("5. Show all patients");
+            System.out.println("6. Show all doctors");
+            System.out.println("7. Show the director's profile");
+            System.out.println("Person search:");
+            System.out.println("8. Find a doctor by name");
+            System.out.println("9. Find a doctor by ID");
+            System.out.println("10. Find a patient by name");
+            System.out.println("11. Find a patient by ID");
+            System.out.println("Appointments:");
+            System.out.println("12. Add an appointment");
+            System.out.println("13. View all appointments\n-----------------------------");
+            System.out.println("14. Sort the patient list.");
+            System.out.println("15. Sort the doctor list.");
+            System.out.println("0. Exit.");
             System.out.println("-----------------------------");
-            System.out.print("\nВиберіть дію: ");
+            System.out.print("\nChoose an action: ");
             int choice  = sc.nextInt();
             
             switch (choice) {
@@ -79,14 +79,14 @@ public class Main implements CommandLineRunner {
                     boolean free_patient_ID;
                     do {
                         sc.nextLine();
-                        System.out.print("Введіть Ім'я: ");
+                        System.out.print("Enter name: ");
                         String registerPatientName = sc.nextLine();
 
-                        System.out.print("Введіть ID: ");
+                        System.out.print("Enter ID: ");
                         int registerPatientID = sc.nextInt();
                         sc.nextLine();
 
-                        System.out.print("Введіть діагноз: ");
+                        System.out.print("Enter diagnosis: ");
                         String registerPatientDiagnosis = sc.nextLine();
                             
                         Patient newPatient = (Patient) personFactory.createPerson(
@@ -102,14 +102,14 @@ public class Main implements CommandLineRunner {
                     boolean free_doctor_ID;
                     do {
                         sc.nextLine();
-                        System.out.print("Введіть Ім'я: ");
+                        System.out.print("Enter name: ");
                         String registerDoctortName = sc.nextLine();
 
-                        System.out.print("Введіть ID: ");
+                        System.out.print("Enter ID: ");
                         int registerDoctorID = sc.nextInt();
                         sc.nextLine();
 
-                        System.out.print("Введіть спеціальність: ");
+                        System.out.print("Enter specialization: ");
                         String registerDoctorSpecialization = sc.nextLine();
                             
                         Doctor newDoctor = (Doctor) personFactory.createPerson(
@@ -123,14 +123,14 @@ public class Main implements CommandLineRunner {
                     break;
                 case 3:
                     int dischargePatientID;
-                    System.out.print("Введіть ID: ");
+                    System.out.print("Enter ID: ");
                     dischargePatientID = sc.nextInt();
                     sc.nextLine();
                     myHospital.dischargePatient(dischargePatientID);
                     break;
                 case 4:
                     int dischargeDoctorID;
-                    System.out.print("Введіть ID: ");
+                    System.out.print("Enter ID: ");
                     dischargeDoctorID = sc.nextInt();
                     sc.nextLine();
                     myHospital.dischargeDoctor(dischargeDoctorID);
@@ -142,49 +142,49 @@ public class Main implements CommandLineRunner {
                     myHospital.displayAllDoctors();
                     break;
                 case 7:
-                    Person dicoratedDirector = new InsuranceDecorator(director, "Преміальний пакет №777");
+                    Person dicoratedDirector = new InsuranceDecorator(director, "Premium package #777");
                     dicoratedDirector.showProfile();
                     break;
                 case 8:
                     sc.nextLine();
-                    System.out.print("Введіть Ім'я: ");
+                    System.out.print("Enter name: ");
                     String name3 = sc.nextLine();
 
                     Person p3 = myHospital.findDoctor(name3);
                     if(p3 != null) p3.showProfile();
-                    else System.out.println("Не знайдено.\n");
+                    else System.out.println("Not found.\n");
                     break;
                 case 9:
-                    System.out.print("Введіть ID: ");
+                    System.out.print("Enter ID: ");
                     int id4  = sc.nextInt();
 
                     Person p4 = myHospital.findDoctor(id4);
                     if(p4 != null) p4.showProfile();
-                    else System.out.println("Не знайдено.\n");
+                    else System.out.println("Not found.\n");
                     break;
                 case 10:
                     sc.nextLine();
-                    System.out.print("Введіть Ім'я: ");
+                    System.out.print("Enter name: ");
                     String name5 = sc.nextLine();
 
                     Person p5 = myHospital.findPatient(name5);
                     if(p5 != null) p5.showProfile();
-                    else System.out.println("Не знайдено.\n");
+                    else System.out.println("Not found.\n");
                     break;
                 case 11:
-                    System.out.print("Введіть ID: ");
+                    System.out.print("Enter ID: ");
                     int id6  = sc.nextInt();
 
                     Person p6 = myHospital.findPatient(id6);
                     if(p6 != null) p6.showProfile();
-                    else System.out.println("Не знайдено.\n");
+                    else System.out.println("Not found.\n");
                     break;
                 case 12:
-                    System.out.print("Введіть ID лікаря: ");
+                    System.out.print("Enter doctor ID: ");
                     int appointmentDoctorID  = sc.nextInt();
                     Doctor appointmentDoctor = myHospital.findDoctor(appointmentDoctorID);
                     
-                    System.out.print("Введіть ID пацієнта: ");
+                    System.out.print("Enter patient ID: ");
                     int appointmentPatientID  = sc.nextInt();
                     Patient appointmentPatient = myHospital.findPatient(appointmentPatientID);
                     
@@ -192,22 +192,22 @@ public class Main implements CommandLineRunner {
 
                     boolean freeDate;
                     do {
-                        System.out.print("Введіть дату запису у форматі дд.мм.рррр: ");
+                        System.out.print("Enter appointment date (dd.MM.yyyy): ");
                         String appointmentDate = sc.nextLine();
 
                         freeDate = myHospital.addAppointment(appointmentDate, appointmentDoctor, appointmentPatient);
                         
-                        if(!freeDate) System.out.println("На цю дату в лікаря " + appointmentDoctor.getName() + " вільного місця, на жаль, нема.");
-                        else System.out.println("Запис успішно створено!");
+                        if(!freeDate) System.out.println("Unfortunately, the doctor " + appointmentDoctor.getName() + " is not available on this date.");
+                        else System.out.println("Appointment created successfully!");
                     } while(!freeDate);
                     break;
                 case 13:
                     myHospital.displayAppointments();
                     break;
                 case 14:
-                    System.out.println("Як сортувати пацієнтів?");
-                    System.out.println("1. За ім'ям");
-                    System.out.println("2. За ID");
+                    System.out.println("How would you like to sort patients?");
+                    System.out.println("1. By name");
+                    System.out.println("2. By ID");
                     int sortChoiceP = sc.nextInt();
 
                     if(sortChoiceP == 1) {
@@ -217,13 +217,13 @@ public class Main implements CommandLineRunner {
                     }
 
                     patientSortContext.executeSort(myHospital.getPatientList());
-                    System.out.println("Список відсортовано.");
+                    System.out.println("List sorted.");
                     myHospital.displayAllPatients();
                     break;
                 case 15:
-                    System.out.println("Як сортувати лікарів?");
-                    System.out.println("1. За ім'ям");
-                    System.out.println("2. За ID");
+                    System.out.println("How would you like to sort doctors?");
+                    System.out.println("1. By name");
+                    System.out.println("2. By ID");
                     int sortChoiceD = sc.nextInt();
 
                     if(sortChoiceD == 1) {
@@ -233,12 +233,12 @@ public class Main implements CommandLineRunner {
                     }
 
                     doctorSortContext.executeSort(myHospital.getDoctorList());
-                    System.out.println("Список відсортовано.");
+                    System.out.println("List sorted.");
                     myHospital.displayAllDoctors();
                     break;
                 default:
                     myHospital.saveAllData();
-                    System.out.println("Дякуємо за використання програми! Гарного дня!\n");
+                    System.out.println("Thank you for using the application! Have a nice day!\n");
                     sc.close();
                     return;
             }

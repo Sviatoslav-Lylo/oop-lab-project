@@ -31,7 +31,7 @@ public class JsonStorageService {
 
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileName), standardList);
         } catch (IOException e) {
-            System.err.println("Помилка збереження у " + fileName + ": " + e.getMessage());
+            System.err.println("Error saving to " + fileName + ": " + e.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class JsonStorageService {
         saveToFile(DOCTORS_FILE, d);
         saveToFile(PATIENTS_FILE, p);
         saveToFile(APPOINTMENTS_FILE, a);
-        System.out.println("Усі дані успішно збережено у JSON.");
+        System.out.println("All data saved to JSON successfully.");
     }
 
     public void loadData(Hospital hospital) {
@@ -62,9 +62,9 @@ public class JsonStorageService {
                 appointments.forEach(a -> hospital.getAppointmentList().add(a));
             }
 
-            System.out.println("Дані успішно відновлено.");
+            System.out.println("Data restored successfully.");
         } catch (IOException e) {
-            System.err.println("Помилка завантаження даних: " + e.getMessage());
+            System.err.println("Error loading data: " + e.getMessage());
         }
     }
 }

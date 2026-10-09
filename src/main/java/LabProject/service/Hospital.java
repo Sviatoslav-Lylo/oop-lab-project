@@ -103,7 +103,7 @@ public class Hospital implements PeopleManager{
     
     public void displayAppointments() {
             for(Appointment a : appointments) {
-                System.out.println("Дата: " + a.getAppointmentDate() + "\nЛікар: " + a.getAppointmentDoctor().getName() + "\nПацієнт: " + a.getAppointmentPatient().getName());
+                System.out.println("Date: " + a.getAppointmentDate() + "\nDoctor: " + a.getAppointmentDoctor().getName() + "\nPatient: " + a.getAppointmentPatient().getName());
                 System.out.println("-------------");
             }
     }
@@ -112,11 +112,11 @@ public class Hospital implements PeopleManager{
     public boolean registerPatient(Patient p) {
         if(iDvalidator.checkIdOriginality(p.getId(), doctors, patients)) {
             patients.add(p);
-            System.out.println("Пацієнта " + p.getName() + " успішно зареєстровано.");
+            System.out.println("Patient " + p.getName() + " registered successfully.");
             return true;
         }
         else {
-            System.out.println("Помилка: ID зайнятий.");
+            System.out.println("Error: ID is already in use.");
             return false;
         }
     }
@@ -126,9 +126,9 @@ public class Hospital implements PeopleManager{
         Patient p = findPatient(id);
         if(p != null) {
             patients.remove(p);
-            System.out.println("Пацієнта виписано.");
+            System.out.println("Patient discharged.");
         } else {
-            System.out.println("Пацієнта не знайдено.");
+            System.out.println("Patient not found.");
         }
     }
 
@@ -136,11 +136,11 @@ public class Hospital implements PeopleManager{
     public boolean registerDoctor(Doctor p) {
         if(iDvalidator.checkIdOriginality(p.getId(), doctors, patients)) {
             doctors.add(p);
-            System.out.println("Лікаря " + p.getName() + " успішно зареєстровано.");
+            System.out.println("Doctor " + p.getName() + " registered successfully.");
             return true;
         }
         else {
-            System.out.println("Помилка: ID зайнятий.");
+            System.out.println("Error: ID is already in use.");
             return false;
         }
     }
@@ -150,9 +150,9 @@ public class Hospital implements PeopleManager{
         Doctor p = findDoctor(id);
         if(p != null) {
             doctors.remove(p);
-            System.out.println("Лікаря виписано.");
+            System.out.println("Doctor discharged.");
         } else {
-            System.out.println("Лікаря не знайдено.");
+            System.out.println("Doctor not found.");
         }
     }
 }

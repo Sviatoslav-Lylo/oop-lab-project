@@ -11,7 +11,7 @@ public class SortContext<T extends Comparable<? super T>> {
 
     public void executeSort(DoublyLinkedList<T> list) {
         if(strategy == null) {
-            System.out.println("Помилка: Стратегію сортування не вибрано.");
+            System.out.println("Error: No sorting strategy selected.");
             return;
         }
         strategy.sort(list);

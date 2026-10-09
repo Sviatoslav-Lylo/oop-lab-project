@@ -19,6 +19,6 @@ public class Patient extends Person {
 
     @Override
     public void showProfile() {
-        System.out.println("------------\n[Пацієнт] \nID: " + getId() + "\nІм'я: " + getName() + "\nДіагноз: " + diagnosis + "\n------------\n");
+        System.out.println("------------\n[Patient] \nID: " + getId() + "\nName: " + getName() + "\nDiagnosis: " + diagnosis + "\n------------\n");
     }
 }

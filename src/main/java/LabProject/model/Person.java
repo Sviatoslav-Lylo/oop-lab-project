@@ -23,7 +23,7 @@ public abstract class Person implements Comparable<Person>{
     @Override
     public boolean equals(Object obj) {
         if(this == obj) return true;
-        if(obj == null || getClass() != obj.getClass()) return false; // якщо різні класи
+        if(obj == null || getClass() != obj.getClass()) return false; // If the classes differ
         Person person = (Person) obj;
         return id == person.id;
     }

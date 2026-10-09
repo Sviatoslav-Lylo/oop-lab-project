@@ -67,7 +67,7 @@ public class DoublyLinkedList<T extends Comparable<? super T>> implements Iterab
 
     public T get(int index) {
         if(index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Індекс поза межами списку");
+            throw new IndexOutOfBoundsException("Index out of bounds");
         }
         Node current = head;
         for(int i = 0; i < index; i++) {
@@ -78,7 +78,7 @@ public class DoublyLinkedList<T extends Comparable<? super T>> implements Iterab
 
     public void set(int index, T data) {
         if(index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Індекс поза межами списку");
+            throw new IndexOutOfBoundsException("Index out of bounds");
         }
         Node current = head;
         for(int i = 0; i < index; i++) {
@@ -110,7 +110,7 @@ public class DoublyLinkedList<T extends Comparable<? super T>> implements Iterab
     //    } while(swapped);
     //}
     
-    @Override // реалізація ітератора для роботи циклів for-each
+    @Override // Iterator implementation for enhanced for loops
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private Node current = head;

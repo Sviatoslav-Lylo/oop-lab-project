@@ -11,7 +11,7 @@ public class PersonFactory {
         return switch (type) {
             case DOCTOR -> new Doctor(name, id, additionalInfo);
             case PATIENT -> new Patient(name, id, additionalInfo);
-            default -> throw new IllegalArgumentException("Невідомий тип особи." + type);
+            default -> throw new IllegalArgumentException("Unknown person type: " + type);
         };
     }
 }

@@ -19,6 +19,6 @@ public class Doctor extends Person {
     
     @Override
     public void showProfile() {
-        System.out.println("-------------\n[Лікар] \nID: " + getId() + "\nІм'я: " + getName() + "\nФах: " + specialization + "\n------------\n");
+        System.out.println("-------------\n[Doctor] \nID: " + getId() + "\nName: " + getName() + "\nSpecialization: " + specialization + "\n------------\n");
     }
 }

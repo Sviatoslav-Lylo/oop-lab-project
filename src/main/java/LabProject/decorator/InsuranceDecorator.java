@@ -13,7 +13,7 @@ public class InsuranceDecorator extends PersonDecorator{
     @Override
     public void showProfile() {
         super.showProfile();
-        System.out.println(">>> Страхування: " + insurancePolicy);
+        System.out.println(">>> Insurance: " + insurancePolicy);
         System.out.println("------------------------------");
     }
 }
